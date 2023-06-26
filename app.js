@@ -7,12 +7,11 @@ const app = express()
 const PORT = process.env.PORT || 5000
 
 app.get('/version', function (req, res) {
-  res.send('5') // change this string to ensure a new version deployed
+  res.send('6') // change this string to ensure a new version deployed
 })
 
 app.get('/health', function (req, res) {
-  throw 'error...'
-  // eslint-disable-next-line no-unreachable
+  // throw 'error...'
   res.send('ok')
 })
 
