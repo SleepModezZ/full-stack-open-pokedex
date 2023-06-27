@@ -34,15 +34,22 @@ jobs:
     if: ${{ github.event_name == 'push' }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
+    permissions:
+      contents: write
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          DEFAULT_BRANCH: master
           DEFAULT_BUMP: patch
 
   deploy_to_render:
     if: ${{ github.event_name == 'push' }}
+    needs: [tag_release]
     runs-on: ubuntu-20.04
     name: Deploy to Render
     steps:
