@@ -35,7 +35,9 @@ jobs:
         if: failure()
         with:
           severity: error
-          details: Build Failed!
+          color: '#ff0000'
+          description: "commit to https://github.com/SleepModezZ/full-stack-open-pokedex/commit/${{ github.sha }} by SleepModezZ broke the build :("
+          text: Build failed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     if: ${{ github.event_name == 'push'  && !contains(join(toJson(github.event.commits.*.message)), '#skip')}}
@@ -70,5 +72,7 @@ jobs:
         if: success()
         with:
           severity: info
-          details: Deployment Succeeded!
+          color: '#00ff00'
+          description: to https://smz-pokedex.onrender.com by SleepModezZ
+          text: A new version of Pokedex deployed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
