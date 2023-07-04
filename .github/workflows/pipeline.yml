@@ -36,7 +36,7 @@ jobs:
         with:
           severity: error
           color: '#ff0000'
-          description: "commit to https://github.com/SleepModezZ/full-stack-open-pokedex/commit/$GITHUB_SHA by SleepModezZ broke the build :("
+          description: "commit to https://github.com/SleepModezZ/full-stack-open-pokedex/commit/$env:GITHUB_SHA by SleepModezZ broke the build :("
           text: Build failed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
