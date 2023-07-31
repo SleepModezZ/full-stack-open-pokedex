@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 
-
+let healthy = true
 
 // Heroku dynamically sets a port
 const PORT = process.env.PORT || 5000
@@ -11,8 +11,25 @@ app.get('/version', function (req, res) {
 })
 
 app.get('/health', function (req, res) {
-  // throw 'error...'
-  res.send('ok')
+  if (healthy) {
+    res.send('ok')
+  }
+  else {
+    res.status(400)
+    res.send('Jotakin vialla!')
+  }
+})
+
+app.get('/break', function (req, res) {
+  if (healthy) {
+    res.send('breaking')
+    healthy = false
+  }
+  else {
+    res.send('healing')
+    healthy = true
+  }
+
 })
 
 app.use(express.static('dist'))
